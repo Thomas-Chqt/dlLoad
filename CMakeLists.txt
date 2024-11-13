@@ -10,8 +10,8 @@ cmake_minimum_required(VERSION 3.16)
 include(CheckSourceCompiles)
 enable_testing()
 
-option(DL_BUILD_TESTS "Build ldLoad tests"            OFF)
-option(DL_INSTALL     "Enable ldLoad install command" OFF)
+option(DL_BUILD_TESTS "Build dlLoad tests"            OFF)
+option(DL_INSTALL     "Enable dlLoad install command" OFF)
 
 project(dlLoad)
 enable_language(C)
