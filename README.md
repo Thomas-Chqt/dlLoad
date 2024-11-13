@@ -1,7 +1,7 @@
 dlLoad
 ======
 
-dlLoad is a mix between `dlopen` and `LoadLibrary`. It is a small library that allows dynamically loading shared libraries on Windows, Linux, and macOS with the same code.
+dlLoad is a mix between `dlopen` and `LoadLibrary`. It is a small library that allows to load shared libraries at runtime with the same code on Windows, Linux, and macOS.
 
 Support
 -------
