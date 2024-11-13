@@ -45,10 +45,10 @@ set(TEST_LIB_3_FILE $<TARGET_FILE:testLib3>)
 add_executable(dlLoad_test)
 
 set_target_properties(dlLoad_test
-PROPERTIES CXX_STANDARD 14
-CXX_STANDARD_REQUIRED   ON
-FOLDER                  "tests"
-ENABLE_EXPORTS          ON
+    PROPERTIES CXX_STANDARD 14
+    CXX_STANDARD_REQUIRED   ON
+    FOLDER                  "tests"
+    ENABLE_EXPORTS          ON
 )
 
 target_sources(dlLoad_test PRIVATE "dlLoad_testCases.cpp")
@@ -79,5 +79,8 @@ set(BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS_BACK} CACHE BOOL "Build using shared l
 
 target_link_libraries(dlLoad_test PRIVATE dlLoad GTest::gtest_main)
 target_link_libraries(testLib3 PRIVATE dlLoad_test)
+if(APPLE)
+    target_link_options(testLib3 PRIVATE "-undefined" "dynamic_lookup")
+endif()
 
 gtest_discover_tests(dlLoad_test)
