@@ -19,10 +19,21 @@ enable_language(C)
 add_library(dlLoad STATIC)
 
 if(UNIX)
-    message(FATAL_ERROR "Unix not yet implemented")
+    message(STATUS "Unix detected")
+    check_source_compiles(C 
+        "#include <dlfcn.h>
+        int main() {
+            void* handle = dlopen(\"path\", RTLD_NOW | RTLD_GLOBAL);
+            void* func = dlsym(handle, \"name\");
+            (void)dlclose(handle);
+        }"
+        can_use_dlopen)
+    if(NOT can_use_dlopen)
+        message(FATAL_ERROR "cannot use dlopen")
+    endif()
+    target_sources(dlLoad PRIVATE "src/dlLoad_unix.c")
 elseif(WIN32)
     message(STATUS "Windows detected")
-    set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
     check_source_compiles(C 
         "#include \"Windows.h\"
         int main() {
@@ -31,7 +42,6 @@ elseif(WIN32)
             (void)FreeLibrary((HMODULE)handle);
         }"
         can_use_LoadLibrary)
-
     if(NOT can_use_LoadLibrary)
         message(FATAL_ERROR "cannot use LoadLibrary")
     endif()
