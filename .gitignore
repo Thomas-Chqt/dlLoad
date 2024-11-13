@@ -1,0 +1,5 @@
+build
+build/
+build.nosync
+build.nosync/
+.vscode/
