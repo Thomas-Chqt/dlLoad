@@ -7,23 +7,19 @@
  * ---------------------------------------------------
  */
 
-#if defined(DL_LOAD_TEST_DLL_BUILD)
-    #if defined(_WIN32)
-        #define DL_LOAD_TEST_API __declspec(dllexport)
-    #else
-        #define DL_LOAD_TEST_API
-    #endif
+#if (defined(__GNUC__) || defined(__clang__)) && defined(DL_LOAD_TEST_API_EXPORT)
+    #define DL_LOAD_TEST_API __attribute__((visibility("default")))
 
-#elif defined(DL_LOAD_TEST_DLL_LINK)
-    #if defined(_WIN32)
-        #define DL_LOAD_TEST_API __declspec(dllimport)
-    #else
-        #define DL_LOAD_TEST_API
-    #endif
+#elif defined(_MSC_VER) && defined(DL_LOAD_TEST_API_EXPORT)
+    #define DL_LOAD_TEST_API __declspec(dllexport)
+
+#elif defined(_MSC_VER) && defined(DL_LOAD_TEST_API_IMPORT)
+    #define DL_LOAD_TEST_API __declspec(dllimport)
 
 #else
     #define DL_LOAD_TEST_API
 #endif
+
 
 class DL_LOAD_TEST_API TestClass
 {

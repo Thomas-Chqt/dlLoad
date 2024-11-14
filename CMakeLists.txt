@@ -5,7 +5,7 @@
 # Date: 2024/11/11 21:21:04
 # ---------------------------------------------------
 
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.24)
 
 include(CheckSourceCompiles)
 enable_testing()

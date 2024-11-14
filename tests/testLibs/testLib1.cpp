@@ -7,23 +7,19 @@
  * ---------------------------------------------------
  */
 
-#if defined(TESTLIB1_DLL_BUILD)
-    #if defined(_WIN32)
-        #define TESTLIB1_API __declspec(dllexport)
-    #else
-        #define TESTLIB1_API
-    #endif
+#if (defined(__GNUC__) || defined(__clang__)) && defined(TESTLIB1_API_EXPORT)
+    #define TESTLIB1_API __attribute__((visibility("default")))
 
-#elif defined(TESTLIB1_DLL_LINK)
-    #if defined(_WIN32)
-        #define TESTLIB1_API __declspec(dllimport)
-    #else
-        #define TESTLIB1_API
-    #endif
+#elif defined(_MSC_VER) && defined(TESTLIB1_API_EXPORT)
+    #define TESTLIB1_API __declspec(dllexport)
+
+#elif defined(_MSC_VER) && defined(TESTLIB1_API_IMPORT)
+    #define TESTLIB1_API __declspec(dllimport)
 
 #else
     #define TESTLIB1_API
 #endif
+
 
 extern "C" 
 {
