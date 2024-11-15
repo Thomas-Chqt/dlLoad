@@ -5,8 +5,6 @@
 # Date: 2024/11/13 19:48:32
 # ---------------------------------------------------
 
-cmake_minimum_required(VERSION 3.24)
-
 add_library(testLib1 SHARED)
 set_target_properties(testLib1 PROPERTIES FOLDER "tests/testLibs")
 target_sources(testLib1 PRIVATE "testLib1.cpp")

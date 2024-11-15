@@ -5,8 +5,6 @@
 # Date: 2024/11/13 19:49:53
 # ---------------------------------------------------
 
-cmake_minimum_required(VERSION 3.24)
-
 add_library(staticLib STATIC)
 set_target_properties(staticLib PROPERTIES FOLDER "tests/staticLib")
 target_sources(staticLib PRIVATE "staticLib.cpp" "staticLib.hpp")

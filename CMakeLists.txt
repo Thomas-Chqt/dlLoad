@@ -5,7 +5,11 @@
 # Date: 2024/11/11 21:21:04
 # ---------------------------------------------------
 
-cmake_minimum_required(VERSION 3.24)
+if(DL_BUILD_TESTS)
+    cmake_minimum_required(VERSION 3.24)
+else()
+    cmake_minimum_required(VERSION 3.19)
+endif()
 
 include(CheckSourceCompiles)
 enable_testing()

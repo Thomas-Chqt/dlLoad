@@ -5,7 +5,7 @@
 # Date: 2024/11/13 20:17:30
 # ---------------------------------------------------
 
-cmake_minimum_required(VERSION 3.24)
+include(CheckLinkerFlag)
 
 add_executable(dlLoad_testwithstaticlib)
 
