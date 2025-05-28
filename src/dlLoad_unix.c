@@ -17,7 +17,10 @@ DlHandle dlLoad(const char* path)
 
 void* getSym(DlHandle handle, const char* name)
 {
-    return dlsym(handle, name);
+    if (handle == DL_DEFAULT)
+        return dlsym(RTLD_DEFAULT, name);
+    else
+        return dlsym(handle, name);
 }
 
 int dlFree(DlHandle handle)

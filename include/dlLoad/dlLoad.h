@@ -17,6 +17,8 @@ extern "C"
 
 typedef void* DlHandle;
 
+#define DL_DEFAULT (DlHandle)0
+
 DlHandle dlLoad(const char* path);
 void* getSym(DlHandle handle, const char* name);
 int dlFree(DlHandle handle);

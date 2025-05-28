@@ -17,7 +17,10 @@ DlHandle dlLoad(const char* path)
 
 void* getSym(DlHandle handle, const char* name)
 {
-    return GetProcAddress((HMODULE)handle, (LPCSTR)name);
+    if (handle == DL_DEFAULT)
+        return GetProcAddress(GetModuleHandle(NULL), (LPCSTR)name);
+    else
+        return GetProcAddress((HMODULE)handle, (LPCSTR)name);
 }
 
 int dlFree(DlHandle handle)
