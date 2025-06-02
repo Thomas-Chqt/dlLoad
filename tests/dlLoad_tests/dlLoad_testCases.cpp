@@ -121,3 +121,26 @@ TEST(dlLoadTest, mainExeFunc)
 
     ASSERT_EQ(dlFree(handle), 0);
 }
+
+extern "C" int function1(void)
+{
+    return 42;
+}
+
+TEST(dlLoadTest, dlDefault)
+{
+    using Func = int (*)(void);
+    
+    Func f = (Func)getSym(DL_DEFAULT, "function1");
+    ASSERT_NE(f, nullptr);
+    ASSERT_EQ(f(), 42);
+}
+
+TEST(dlLoadTest, dlDefaultFromLinkedDll)
+{
+    using Func = int (*)(const char*);
+    
+    Func f = (Func)getSym(DL_DEFAULT, "atoi");
+    ASSERT_NE(f, nullptr);
+    ASSERT_EQ(f("42"), 42);
+}
