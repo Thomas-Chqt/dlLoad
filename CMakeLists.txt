@@ -22,6 +22,8 @@ enable_language(C)
 
 add_library(dlLoad STATIC)
 
+target_sources(dlLoad PRIVATE "include/dlLoad/dlLoad.h")
+
 if(UNIX)
     message(STATUS "Unix detected")
     check_source_compiles(C 
