@@ -37,3 +37,5 @@ target_link_libraries(testLib3 PRIVATE dlLoad_test)
 
 add_subdirectory("dlLoad_testWithStaticLib")
 target_link_libraries(testLib4 PRIVATE dlLoad_testwithstaticlib)
+
+add_subdirectory("dlLoad_testDlDefault")

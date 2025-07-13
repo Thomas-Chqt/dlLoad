@@ -6,6 +6,11 @@
 # ---------------------------------------------------
 
 add_library(staticLib STATIC)
+set_target_properties(staticLib PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
 set_target_properties(staticLib PROPERTIES FOLDER "tests/staticLib")
 target_sources(staticLib PRIVATE "staticLib.cpp" "staticLib.hpp")
 target_include_directories(staticLib PUBLIC ${CMAKE_CURRENT_LIST_DIR})
