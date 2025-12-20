@@ -57,6 +57,10 @@ else()
 endif()
 
 target_include_directories(dlLoad PRIVATE "src" PUBLIC "include")
+if(UNIX AND NOT APPLE)
+    target_compile_definitions(dlLoad PRIVATE _GNU_SOURCE)
+endif()
+
 
 if (DL_BUILD_TESTS)
     add_subdirectory(tests)
