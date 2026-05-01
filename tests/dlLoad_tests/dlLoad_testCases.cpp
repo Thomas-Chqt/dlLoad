@@ -16,7 +16,7 @@ TEST(dlLoadTest, voidFuncNoArg)
 {
     using Func = void (*)();
 
-    DlHandle handle = dlLoad(TEST_LIB_1_FILE, DL_LOCAL);
+    DlHandle handle = dlLoad(TEST_LIB_1_FILE, DL_NOW | DL_LOCAL);
     ASSERT_NE(handle, nullptr);
 
     Func f = (Func)getSym(handle, "function1");
@@ -31,7 +31,7 @@ TEST(dlLoadTest, intFuncNoArg)
 {
     using Func = int (*)();
 
-    DlHandle handle = dlLoad(TEST_LIB_1_FILE, DL_LOCAL);
+    DlHandle handle = dlLoad(TEST_LIB_1_FILE, DL_NOW | DL_LOCAL);
     ASSERT_NE(handle, nullptr);
 
     Func f = (Func)getSym(handle, "function2");
@@ -46,7 +46,7 @@ TEST(dlLoadTest, intFuncIntArg)
 {
     using Func = int (*)(int);
 
-    DlHandle handle = dlLoad(TEST_LIB_1_FILE, DL_LOCAL);
+    DlHandle handle = dlLoad(TEST_LIB_1_FILE, DL_NOW | DL_LOCAL);
     ASSERT_NE(handle, nullptr);
 
     Func f = (Func)getSym(handle, "function3");
@@ -62,7 +62,7 @@ TEST(dlLoadTest, sizetFuncStrArg)
 {
     using Func = size_t (*)(const std::string&);
 
-    DlHandle handle = dlLoad(TEST_LIB_2_FILE, DL_LOCAL);
+    DlHandle handle = dlLoad(TEST_LIB_2_FILE, DL_NOW | DL_LOCAL);
     ASSERT_NE(handle, nullptr);
 
     Func f = (Func)getSym(handle, "function1");
@@ -88,7 +88,7 @@ TEST(dlLoadTest, mainExeClassConstructor)
 {
     using Func = TestClass* (*)(int);
 
-    DlHandle handle = dlLoad(TEST_LIB_3_FILE, DL_LOCAL);
+    DlHandle handle = dlLoad(TEST_LIB_3_FILE, DL_NOW | DL_LOCAL);
     ASSERT_NE(handle, nullptr);
 
     Func f = (Func)getSym(handle, "function1");
@@ -107,7 +107,7 @@ TEST(dlLoadTest, mainExeFunc)
 {
     using Func = TestClass* (*)(int);
 
-    DlHandle handle = dlLoad(TEST_LIB_3_FILE, DL_LOCAL);
+    DlHandle handle = dlLoad(TEST_LIB_3_FILE, DL_NOW | DL_LOCAL);
     ASSERT_NE(handle, nullptr);
 
     Func f = (Func)getSym(handle, "function2");

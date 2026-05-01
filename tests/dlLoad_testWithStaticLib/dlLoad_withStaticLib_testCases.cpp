@@ -22,7 +22,7 @@ TEST(dlLoadTestWithStaticLib, mainExeClassConstructor)
 {
     using Func = StaticLibClass* (*)(int);
 
-    DlHandle handle = dlLoad(TEST_LIB_4_FILE, DL_LOCAL);
+    DlHandle handle = dlLoad(TEST_LIB_4_FILE, DL_NOW | DL_LOCAL);
     ASSERT_NE(handle, nullptr);
 
     Func f = (Func)getSym(handle, "function1");
@@ -41,7 +41,7 @@ TEST(dlLoadTestWithStaticLib, mainExeFunc)
 {
     using Func = StaticLibClass* (*)(int);
 
-    DlHandle handle = dlLoad(TEST_LIB_4_FILE, DL_LOCAL);
+    DlHandle handle = dlLoad(TEST_LIB_4_FILE, DL_NOW | DL_LOCAL);
     ASSERT_NE(handle, nullptr);
 
     Func f = (Func)getSym(handle, "function2");
