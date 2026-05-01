@@ -44,10 +44,7 @@ using Func = int (*)(int)
 int main()
 {
     // create a handle to the shared library
-    // equivalent to :
-    // Windows : LoadLibraryExA((LPCSTR)"path/to/myLib.dll", (HANDLE)NULL, (DWORD)0);
-    // Unix : dlopen("path/to/myLib.dll", RTLD_NOW | RTLD_GLOBAL);
-    DlHandle handle = dlLoad("path/to/myLib.dll");
+    DlHandle handle = dlLoad("path/to/myLib.dll", DL_NOW | DL_LOCAL);
 
     // retrive a function pointer to the desired function in the library
     Func f = (Func)getSym(handle, "myFunction");
@@ -59,3 +56,19 @@ int main()
     dlFree(handle);
 }
 ````
+
+Load flags
+----------
+
+`dlLoad()` takes a bitmask of flags:
+
+```cpp
+DlHandle handle = dlLoad("path/to/myLib.dll", DL_NOW | DL_LOCAL);
+```
+
+| dlLoad flags | Unix equivalent | Windows equivalent |
+|--------------|-----------------|--------------------|
+| `DL_LAZY`    | `RTLD_LAZY`     | `0`                |
+| `DL_NOW`     | `RTLD_NOW`      | `0`                |
+| `DL_GLOBAL`  | `RTLD_GLOBAL`   | `0`                |
+| `DL_LOCAL`   | `RTLD_LOCAL`    | `0`                |

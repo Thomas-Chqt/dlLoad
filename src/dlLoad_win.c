@@ -8,10 +8,11 @@
  */
 
 #include "dlLoad/dlLoad.h"
-#include "Windows.h"
+#include <Windows.h>
 
-DlHandle dlLoad(const char* path)
+DlHandle dlLoad(const char* path, DlLoadFlags flags)
 {
+    (void)flags;
     return LoadLibraryExA((LPCSTR)path, (HANDLE)NULL, (DWORD)0);
 }
 
