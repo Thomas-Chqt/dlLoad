@@ -8,11 +8,52 @@
  */
 
 #include "dlLoad/dlLoad.h"
+#include <stddef.h>
 #include <dlfcn.h>
 
-DlHandle dlLoad(const char* path)
+static int getNativeFlags(DlLoadFlags flags)
 {
-    return dlopen(path, RTLD_NOW | RTLD_GLOBAL);
+    int nativeFlags = 0;
+    DlLoadFlags knownFlags[] = {
+        DL_LAZY,
+        DL_NOW,
+        DL_GLOBAL,
+        DL_LOCAL
+    };
+    size_t i = 0;
+
+    for (i = 0; i < sizeof(knownFlags) / sizeof(knownFlags[0]); i++)
+    {
+        DlLoadFlags knownFlag = knownFlags[i];
+
+        if ((flags & knownFlag) == 0)
+            continue;
+
+        switch (knownFlag)
+        {
+        case DL_LAZY:
+            nativeFlags |= RTLD_LAZY;
+            break;
+        case DL_NOW:
+            nativeFlags |= RTLD_NOW;
+            break;
+        case DL_GLOBAL:
+            nativeFlags |= RTLD_GLOBAL;
+            break;
+        case DL_LOCAL:
+            nativeFlags |= RTLD_LOCAL;
+            break;
+        default:
+            break;
+        }
+    }
+
+    return nativeFlags;
+}
+
+DlHandle dlLoad(const char* path, DlLoadFlags flags)
+{
+    return dlopen(path, getNativeFlags(flags));
 }
 
 void* getSym(DlHandle handle, const char* name)

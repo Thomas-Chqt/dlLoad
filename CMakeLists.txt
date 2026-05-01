@@ -35,6 +35,7 @@ if(UNIX)
         int main() {
             void* handle = dlopen(\"path\", RTLD_NOW | RTLD_GLOBAL);
             void* func = dlsym(handle, \"name\");
+            (void)func;
             (void)dlclose(handle);
         }"
         can_use_dlopen)
@@ -49,6 +50,7 @@ elseif(WIN32)
         int main() {
             void* handle = LoadLibraryExA((LPCSTR)\"\", (HANDLE)NULL, (DWORD)0);
             void* func = GetProcAddress((HMODULE)handle, (LPCSTR)\"\");
+            (void)func;
             (void)FreeLibrary((HMODULE)handle);
         }"
         can_use_LoadLibrary)

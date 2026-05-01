@@ -26,7 +26,7 @@ int dyload_function2()
 {
     using Func = int (*)(void);
 
-    DlHandle handle = dlLoad(TEST_LIB_1_FILE);
+    DlHandle handle = dlLoad(TEST_LIB_1_FILE, DL_NOW | DL_LOCAL);
     if (handle == nullptr)
         return -1;
 
